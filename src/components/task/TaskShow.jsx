@@ -1,5 +1,5 @@
-function TaskShow() {
-  return <div>TaskShow</div>;
+function TaskShow({ task }) {
+  return <div>{task}</div>;
 }
 
 export default TaskShow;

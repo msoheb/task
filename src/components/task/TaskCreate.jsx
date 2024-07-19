@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 function TaskCreate() {
-  const [check, setCheck] = useState(false);
   const [task, setTask] = useState("");
 
   const handleChange = (event) => {
@@ -12,11 +11,6 @@ function TaskCreate() {
   return (
     <div>
       <form>
-        <input
-          type="checkbox"
-          value={check}
-          onChange={() => setCheck(!check)}
-        />
         <input
           type="text"
           placeholder="Add a task"
