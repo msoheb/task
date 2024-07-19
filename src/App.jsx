@@ -1,5 +1,7 @@
+import TaskCreate from "./components/task/TaskCreate";
+
 function App() {
-  return <div>Task</div>;
+  return <TaskCreate />;
 }
 
 export default App;
