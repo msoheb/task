@@ -3,7 +3,7 @@
 **Todo**
 
 - [x] - Initial Setup
-- [ ] - Structure organization
+- [x] - Structure organization
 - [ ] - Components creation
 - [ ] - Integration
 - [ ] - Styling
