@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function TaskCreate() {
+function TaskCreate({ addTask }) {
   const [task, setTask] = useState("");
 
   const handleChange = (event) => {
@@ -8,9 +8,15 @@ function TaskCreate() {
     setTask(event.target.value);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addTask(task);
+    setTask("");
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Add a task"
