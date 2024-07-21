@@ -1,30 +1,57 @@
-import { useState } from "react";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const formSchema = z.object({
+  task: z.string().min(2, {
+    message: "Task must be at least 2 characters",
+  }),
+});
 
 function TaskCreate({ addTask }) {
-  const [task, setTask] = useState("");
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      task: "",
+    },
+  });
 
-  const handleChange = (event) => {
-    console.log(task);
-    setTask(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    addTask(task);
-    setTask("");
+  const handleSubmit = (value) => {
+    addTask(value.task);
+    form.reset();
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Add a task"
-          value={task}
-          onChange={handleChange}
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="task"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Task</FormLabel>
+              <FormControl>
+                <Input placeholder="Plan your day" {...field} />
+              </FormControl>
+              <FormDescription>Add a Task!</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
         />
+        <Button type="submit">Submit</Button>
       </form>
-    </div>
+    </Form>
   );
 }
 
